@@ -9,7 +9,7 @@ const server = http.createServer(app);
 const io = new SocketIOServer(server); 
 
 app.use(cors());
-app.use(express.json());
+app.use(express.json()); 
 
 const connections = new Map();
 
@@ -42,9 +42,11 @@ app.post('/chat', async (req, res) => {
     }
  
     try {
+        console.log('Received input_value:', input_value);
+        console.log('Received requestId:', requestId);
         const response = await axios.post(
             // Replace it with  OpenAI API endpoint
-            'https://api.openai.com/v1/chat/completions',
+            'https://api.langflow.astra.datastax.com/lf/12b2e530-ffec-46bc-970b-5c208f8f5e43/api/v1/run/67c26750-9b21-4313-8eda-ef2b2760069f?stream=false',
             {
                 input_value,
                 output_type: 'chat',
